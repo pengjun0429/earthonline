@@ -1,0 +1,167 @@
+:root {
+  --bg-color: #050505;
+  --panel-bg: #0d0d0d;
+  --border-color: #333;
+  --text-primary: #e0e0e0;
+  --text-secondary: #888;
+  --accent-color: #00ffcc;
+  --danger-color: #ff3333;
+  --font-mono: 'Courier New', Courier, monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  overflow: hidden; /* Hide scrollbars for the terminal feel */
+  user-select: none;
+}
+
+/* Three-column Layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Header */
+.system-header {
+  height: 50px;
+  background-color: var(--panel-bg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-color);
+  animation: pulse 2s infinite;
+}
+
+/* Main Content Area */
+.main-content {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 50px);
+}
+
+/* Left Sidebar - Metrics Terminal */
+.metrics-terminal {
+  width: 350px;
+  background-color: var(--panel-bg);
+  border-right: 1px solid var(--border-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.metric-group {
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.metric-title {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.metric-value {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  word-break: break-all;
+}
+
+.vital-signs {
+  font-size: 1.2rem;
+  color: var(--danger-color);
+  letter-spacing: 2px;
+}
+
+/* Geographic Matrix */
+.geographic-matrix {
+  flex: 1;
+  position: relative;
+  background-color: #000; /* Map container bg */
+}
+
+/* Overlays on Map */
+.map-overlays {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  pointer-events: none;
+  display: flex;
+  gap: 20px;
+}
+
+.overlay-box {
+  background: rgba(13, 13, 13, 0.85);
+  border: 1px solid var(--accent-color);
+  padding: 15px;
+  backdrop-filter: blur(4px);
+}
+
+.overlay-title {
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.overlay-value {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: var(--font-sans);
+}
+
+@keyframes pulse {
+  0% { opacity: 1; box-shadow: 0 0 8px var(--accent-color); }
+  50% { opacity: 0.4; box-shadow: 0 0 2px var(--accent-color); }
+  100% { opacity: 1; box-shadow: 0 0 8px var(--accent-color); }
+}
+
+/* Leaflet Customizations */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  background: #000 !important;
+}
+.leaflet-control-zoom {
+  border: 1px solid var(--border-color) !important;
+}
+.leaflet-bar a {
+  background-color: var(--panel-bg) !important;
+  color: var(--accent-color) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
